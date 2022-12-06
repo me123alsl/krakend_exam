@@ -43,8 +43,24 @@
             }
           }
       ]
-  }
-  ],
+  },
+  {
+    "endpoint": "/c",
+    "timeout": "800ms",
+    "method": "GET",
+    "backend": [
+        {
+            "url_pattern": "/",
+            "encoding": "json",
+            "method": "GET",
+            "host": [
+                "192.168.56.11:8883"
+            ],
+            "target": "data"       
+          } 
+        ]
+      }
+    ],
   "tls": {
     "public_key": "/home/vagrant/.ssh/public.pem",
     "private_key": "/home/vagrant/.ssh/private.pem"

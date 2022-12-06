@@ -42,8 +42,9 @@
 # Response manipulation (new6.json)
 
 ``` json
-// original backend response 
+// backend response 
 // backend1 
+
 { 
     "service": "A",
     "message": "ServiceA"
@@ -54,6 +55,15 @@
     "service": "B",
     "message": "ServiceB"
 }
+// backend3
+{ 
+    "service": "C",
+    "message": "ServiceC"
+    "data": {
+        "name": "sam",
+        "age": 30
+    }
+}
 ```
 | <h3>Option | <h3>Description | <h3>example</h3> |
 |:-------------:|:-----------:|:-------|
@@ -61,3 +71,4 @@
 | allow | within field name | // backend1 -> "allow" : [ "service" ] </br> // backend2 -> "allow" : [ "message" ]</br> { "backend1" : { "service":"A"   }, "backend2" : { "message" : "ServiceB"}  } |
 | deny | without field name | // backend1 -> "deny" : [ "message" ] </br> // backend2 -> "deny" : [ "service" ]</br> { "backend1" : { "service":"A"   }, "backend2" : { "message" : "ServiceB"} } |
 | mapping | replace field name | // backend1 -> "mapping" : { "service":"service_name" } </br> // backend2 -> "mapping" : { "message" : "contents" } </br> {"backend1":{"service_name":"A"},"backend2":{"contents":"ServiceB"}} |
+| target | extract field | // backend3 -> "target" : "data" </br> {"age":30,"name":"sam"} |
