@@ -9,7 +9,7 @@
 | new3.json | Using Https url -self signed certificate <br> Result : Pass all urls |
 | new4.json | 'new3.json' Add header 'Cookie' <br> Result : don't passed cookie. Backend not recognizing Cookie header |
 | new5.json | Add all header pass and change encoding 'no-op' <br> Result : Passed 'Cookie' header. |
-| new6.json | Merging reponse service A,B <br> Result : response merged and field name at config's 'group' field |
+| new6.json | manipulation reponse </br>[ move [Response manipulation] ](#response-manipulation-new6json) |
 
 ---
 
