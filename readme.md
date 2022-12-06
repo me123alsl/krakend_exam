@@ -35,3 +35,29 @@
 | <h3>Krakend  | >> | <h3>Backend | <h3>description |
 |:-------------:|:--:|:-----------:|:-----------:|
 | /ab | >> | serviceA / serviceB | response merge serviceA and serviceB |
+
+---
+</br></br>
+
+# Response manipulation (new6.json)
+
+``` json
+// original backend response 
+// backend1 
+{ 
+    "service": "A",
+    "message": "ServiceA"
+}
+
+// backend2
+{ 
+    "service": "B",
+    "message": "ServiceB"
+}
+```
+| <h3>Option | <h3>Description | <h3>example</h3> |
+|:-------------:|:-----------:|:-------|
+| group | add reponse's  root field name | // backend1 -> "group":"backend1" </br> // backend2 -> "group":"backend2" </br>{ "backend1" : { "service":"A"  ,"message" : "ServiceA" }, </br> "backend2" : { "service": "B", "message" : "ServiceB"} } |
+| allow | within field name | // backend1 -> "allow" : [ "service" ] </br> // backend2 -> "allow" : [ "message" ]</br> { "backend1" : { "service":"A"   }, "backend2" : { "message" : "ServiceB"}  } |
+| deny | without field name | // backend1 -> "deny" : [ "message" ] </br> // backend2 -> "deny" : [ "service" ]</br> { "backend1" : { "service":"A"   }, "backend2" : { "message" : "ServiceB"} } |
+| mapping | replace field name | // backend1 -> "mapping" : { "service":"service_name" } </br> // backend2 -> "mapping" : { "message" : "contents" } </br> {"backend1":{"service_name":"A"},"backend2":{"contents":"ServiceB"}} |
