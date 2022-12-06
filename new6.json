@@ -1,0 +1,40 @@
+{
+  "$schema": "https://www.krakend.io/schema/v3.json",
+  "version": 3,
+  "name": "KrakenD - API Gateway",
+  "timeout": "3000ms",
+  "cache_ttl": "300s",
+  "output_encoding": "json",
+  "port": 8081,
+  "endpoints": [
+    {
+      "endpoint": "/ab",
+      "timeout": "800ms",
+      "method": "GET",
+      "backend": [
+          {
+              "url_pattern": "/",
+              "encoding": "json",
+              "method": "GET",
+              "host": [
+                  "192.168.56.11:8881"
+              ],
+              "group": "backend1"
+          },
+          {
+              "url_pattern": "/",
+              "encoding": "json",
+              "method": "GET",
+              "host": [
+                  "192.168.56.11:8882"
+              ],
+              "group": "backend2"
+          }
+      ]
+  }
+  ],
+  "tls": {
+    "public_key": "/home/vagrant/.ssh/public.pem",
+    "private_key": "/home/vagrant/.ssh/private.pem"
+  }
+}
