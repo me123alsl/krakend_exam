@@ -9,8 +9,8 @@
 | new3.json | Using Https url -self signed certificate <br> Result : Pass all urls |
 | new4.json | 'new3.json' Add header 'Cookie' <br> Result : don't passed cookie. Backend not recognizing Cookie header |
 | new5.json | Add all header pass and change encoding 'no-op' <br> Result : Passed 'Cookie' header. |
-| new6.json | manipulation reponse </br>[ move [Response manipulation] ](#response-manipulation-new6json) |
-
+| new6.json | manipulation reponse </br> [ move [Response manipulation] ](#response-manipulation-new6json) |
+| new7.json | Http error status reponse |
 ---
 
 ## 2. Endpoint urls
@@ -72,3 +72,36 @@
 | deny | without field name | // backend1 -> "deny" : [ "message" ] </br> // backend2 -> "deny" : [ "service" ]</br> { "backend1" : { "service":"A"   }, "backend2" : { "message" : "ServiceB"} } |
 | mapping | replace field name | // backend1 -> "mapping" : { "service":"service_name" } </br> // backend2 -> "mapping" : { "message" : "contents" } </br> {"backend1":{"service_name":"A"},"backend2":{"contents":"ServiceB"}} |
 | target | extract field | // backend3 -> "target" : "data" </br> {"age":30,"name":"sam"} |
+
+
+# Flexible Krakend Config
+## ref : Contents directory : flexible-config
+
+| <h3> Directory | <h3>File | <h3>Description |
+|:--------------:|:-------------:|:-----------:|
+| settings |  |sub configure files(backend, endpoint) </br> (used in krakend configuration) |
+| settings | service.json | krakend daemon configure (port, encoding, tls settigs, etc ...) |
+| settings | single_endpoint.json | endpoint settings (normal endpoint) |
+| settings | merge_endpoint.json | endpoint settings (2 reponse merged) |
+| partials |  |sub configure files(extra-config) </br> (used in krakend configuration) |
+
+--- 
+## Krakend syntax check scripts : [check_syntax.sh](./flexible-config/check_syntax.sh)
+### Usage : ./check_syntax.sh <output_json_file> <krakend_json_file>
+  
+--- 
+
+## Environment variables - reference: [Docs krakend -flexible-config](https://www.krakend.io/docs/flexible-config/)
+
+`FC_ENABLE=1` to let KrakenD know that you are using Flexible Configuration. You can use 1 or any other value (but 0 won’t disable it!). The file passed with the -c flag is the base template.
+
+`FC_SETTINGS=dirname`: The path to the directory with all the settings files.
+
+
+`FC_PARTIALS=dirname`: The path to the directory with the partial files included in the configuration file. Partial files DON’T EVALUATE, they are only inserted in the placeholder.
+
+
+`FC_TEMPLATES=dirname`: The path to the directory with the sub-templates included in the configuration file. These are evaluated using the Go templating system.
+
+
+`FC_OUT`: For debugging purposes, saves the resulting configuration of processing the flexible configuration in the given filename. Otherwise, the final file is not visible.

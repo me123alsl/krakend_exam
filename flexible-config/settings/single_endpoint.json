@@ -1,0 +1,16 @@
+{
+  "endpoints": [
+    {
+      "endpoint": "/a",
+      "backend_url": "/",
+      "backend_method": "GET",
+      "backend_host": ["192.168.56.11:8881"]
+    },
+    {
+      "endpoint": "/b",
+      "backend_url": "/",
+      "backend_method": "GET",
+      "backend_host": ["192.168.56.11:8882"]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "endpoints":
+    {
+      "endpoint": "/ab",
+      "backend": [
+        {
+          "url_pattern": "/",
+          "encoding": "json",
+          "method": "GET",
+          "host": ["192.168.56.11:8881"],
+          "group": "backend1",
+          "allow": ["service"],
+          "mapping": {
+            "service": "service_name"
+          }
+        },
+        {
+          "url_pattern": "/",
+          "encoding": "json",
+          "method": "GET",
+          "host": ["192.168.56.11:8882"],
+          "group": "backend2",
+          "deny": ["service"],
+          "mapping": {
+            "message": "contents"
+          }
+        }
+      ]
+    }
+}

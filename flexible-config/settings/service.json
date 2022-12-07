@@ -1,0 +1,9 @@
+{
+  "port": 8090,
+  "timeout": "3000ms",
+  "output_encoding": "json",
+  "tls": {
+    "public_key": "/home/vagrant/.ssh/public.pem",
+    "private_key": "/home/vagrant/.ssh/private.pem"
+  }
+}

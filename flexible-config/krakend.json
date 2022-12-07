@@ -1,0 +1,26 @@
+{
+    "version": 3,
+    "name": "krakend_flexible_config_example",
+    "timeout": "{{ .service.timeout }}",
+    "port": "{{ .service.port }}",
+    "output_encoding": "{{ .service.output_encoding }}",
+    "endpoints": [
+        {{ range $idx, $endpoint := .single_endpoint.endpoints }}
+        {{if $idx}},{{end}}
+        {
+        "endpoint": "{{ $endpoint.endpoint }}",
+        "backend": [
+            {
+                "url_pattern": "{{ $endpoint.backend_url }}",
+                "method": "{{ $endpoint.backend_method }}",
+                "host": {{ marshal $endpoint.backend_host }}
+            }
+        ]
+        }
+        {{ end }}
+    ],
+    "tls": {
+      "public_key": "{{ .service.tls.public_key }}",
+      "private_key": "{{ .service.tls.private_key }}"
+    }
+}
